@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>chatnote</title>
+        <style>
+        
+        #topfunctionalarea {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 50px;                 /* 常见导航栏高度 */
+            background: #fff;
+            border-bottom: 1px solid #ddd;/* 底部分割线 */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 12px;
+            box-sizing: border-box;
+            z-index: 10;
+        }
+        
+        #teanbo {
+            display: flex;
+            align-items: center;
+        }
+        
+        #show {
+            font-size: 22px; 
+            cursor: pointer;
+        }
+        
+        #more {
+            font-size: 16px; 
+            cursor: pointer;
+        }
+        
+        #chatbubblearea {
+            box-sizing: border-box;
+            padding: 60px 10px 60px 10px;   
+            min-height: 100vh;              
+            overflow-y: auto;               
+        }
+
+        #bottomchatbox {
+            z-index: 99;
+        }
+        
+        #chatbubblearea > div {         
+            display: block;              
+            margin-bottom: 8px;           
+        }
+        
+        #bottomchatbox {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 52px;
+            background: #fff;
+            border-top: 1px solid #ddd;
+            display: flex; 
+            align-items: center;
+            padding: 0 10px; 
+            box-sizing: border-box;
+        }
+        
+        #messageInput {
+            flex: 1 1 auto;
+            height: 36px; 
+            padding: 0 10px;
+            border: 1px solid #ccc; 
+            border-radius: 4px; 
+            font-size: 14px; 
+            outline: none;
+        }
+        
+        #sendButton {
+            margin-left: 8px;
+            width: 60px;
+            height: 36px;
+            border: none;
+            background:#07c160;
+            color:#fff; 
+            border-radius: 4px; 
+            font-size: 14px; 
+            cursor: pointer;
+        }
+        
+        </style>
+	</head>
+	<body>
+       <div id="generalpage">
+       
+        <div id="topfunctionalarea">
+          <div id="teanbo">
+            <span id="show">☰</span>
+            <span style="margin-left: 10px; font-size: 18px; font-weight: 500;">Note</span>
+          </div>
+
+          <span id="more">更多</span>
+        </div>
+        
+        <div id="chatbubblearea">
+        </div>
+        
+        <div id="bottomchatbox">
+         
+          <input id="messageInput" type="text" placeholder="输入消息…">
+        
+          <button id="sendButton">发送</button>
+        </div>
+        
+       </div>
+       
+     <script>
+  
+
+  const input = document.getElementById('messageInput');
+  const btn   = document.getElementById('sendButton');
+  const area  = document.getElementById('chatbubblearea');
+
+  btn.addEventListener('click', () => {
+    
+    const txt = input.value.trim();
+    if (!txt) {
+      alert('输入是空的，不发送');
+      return;
+    }
+    
+
+    const bubble = document.createElement('div');
+    bubble.style.cssText = `
+      margin:6px 0;
+      padding:8px 12px;
+      background:#f1f1f1;
+      border-radius:4px;
+      display:block;
+      max-width:60%;
+    `;
+    bubble.textContent = txt;
+    area.appendChild(bubble);
+
+    input.value = '';
+    input.focus();
+    area.scrollTop = area.scrollHeight;
+
+    
+  });
+</script>
+	</body>
+</html>
